@@ -3,17 +3,18 @@ console.log ("Deploy to Render");
 async function getPosts(){
   console.log("I am getPosts, and I am about to fetch some data");
   const response = await fetch("http://jsonplaceholder.typicode.com/posts");
+  const beachesResponse = await fetch("https://cs-app-deploy-render.onrender.com/beaches");
 
 console.log (response);
-const data = await response.json ();
+const data = await response.json();
 console.log (data);
-console.log (" I am getPosts, and i'm about to give the data to renderDataOnToPage()")
-renderDataOnToPage(data);
+console.log (" I am getPosts, and i'm about to give the data to renderDataOnToPage()");
+renderBeachesOnToPage(beachesResponse);
 }
 
-function renderDataOnToPage(apiResults) {
+function renderBeachesOnToPage(apiResults) {
 
-  console.log("I am renderDataOnToPage, and I am about to loop through the array");
+  console.log("I am renderBeachesOnToPage, and I am about to loop through the array");
 
   const resultDiv = document.getElementById ("results");
   resultDiv.innerHTML = "";
@@ -22,13 +23,15 @@ function renderDataOnToPage(apiResults) {
     const element = apiResults[index];
     console.log(element);
 
-    const newTitle = document.createElement("h2");
-    const newBody = document.createElement ("p");
+    const newName = document.createElement("h2");
+    const newLocation = document.createElement ("p");
+    const newDescription = document.createElement ("p");
 
-    newTitle.textContent = element.title; 
-    newBody.textContent = element.body; 
+    newName.textContent = element.name; 
+    newLocation.textContent = element.location; 
+    newDescription.textContent = element.description; 
 
-    resultsDiv.appendChild(newTitle, newBody);
+    resultsDiv.appendChild(newName, newLocation, newDescription);
   }
 }
 
